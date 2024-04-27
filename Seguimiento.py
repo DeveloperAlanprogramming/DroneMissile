@@ -5,14 +5,11 @@ import numpy as np
 import math
 import time
 
-
-
-
 cap = cv2.VideoCapture(1)
 ret, frame = cap.read()
 frame_gray_init = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-parameters = dict(winSize=(25, 25),
+parameters = dict(winSize=(85, 85),
                                maxLevel=2,
                                criteria=(cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 0.05))
 
@@ -48,8 +45,7 @@ while True:
                                                               frame_gray,
                                                               old_points,
                                                               None,
-                                                             **parameters)
-        
+                                                             **parameters)    
         frame_gray_init = frame_gray.copy()
         old_points = new_points
 
@@ -68,7 +64,7 @@ while True:
         
         if float(coord_x) > 280 and float(coord_y) >280:
             
-            cv2.putText(frame, f'Destroy Rocket', (250,100), cv2.FONT_HERSHEY_SIMPLEX, 1, (250, 250, 250), 2)
+            cv2.putText(frame, f'TRACKING SYSTEM', (250,100), cv2.FONT_HERSHEY_SIMPLEX, 1, (250, 0, 250), 3)
         
             
     cv2.imshow("Frame", frame)
