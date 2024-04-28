@@ -65,8 +65,6 @@ class metodos(Generative_IAS):
             mensaje="ON"
             self.cap.release()
             cv2.destroyAllWindows()
-    
-
             
     def opencam(self):
         

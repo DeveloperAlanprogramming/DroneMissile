@@ -64,7 +64,6 @@ class Laser(metodos):
         self.Mensajes()
         self.root.mainloop()   
         
-  
     def caja_botones(self):
         
         self.button1=tk.Button(self.root,text="OPEN",command=self.abrir_camara, background="gray",width=10,height=2,font=("arial", 20,"bold"))

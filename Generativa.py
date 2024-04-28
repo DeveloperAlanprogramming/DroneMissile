@@ -11,8 +11,6 @@ from keras.utils import to_categorical
 from sklearn.model_selection import train_test_split
 
 
-
-
 class Generative_IAS:
     
     def __init__(self):
