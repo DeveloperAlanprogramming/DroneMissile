@@ -1,40 +1,34 @@
-import tkinter as tk
+import pygame
 
-class TriangleButton(tk.Canvas):
-    def __init__(self, parent, text, size, color, command=None, *args, **kwargs):
-        super().__init__(parent, width=size, height=size, *args, **kwargs)
-        self.parent = parent
-        self.size = size
-        self.color = color
-        self.command = command
-        
-        self.create_polygon(0, size, size/2, 0, size, size, outline=color, fill=color)
-        self.create_text(size/2, size/2, text=text, fill="white")
-        self.bind("<Button-1>", self.handle_click)
+# Inicializar pygame
+pygame.init()
 
-    def handle_click(self, event):
-        if self.command:
-            self.command()
+# Obtener la cantidad de joysticks disponibles
+num_joysticks = pygame.joystick.get_count()
 
-def on_button_click():
-    print("Botón de triángulo presionado")
+if num_joysticks > 0:
+    print("Se encontraron {} joysticks.".format(num_joysticks))
+    # Inicializar el primer joystick
+    joystick = pygame.joystick.Joystick(0)
+    joystick.init()
 
-if __name__ == "__main__":
-    root = tk.Tk()
-    root.title("Botón de Triángulo")
+    # Ciclo principal
+    while True:
+        # Manejar eventos
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
 
-    triangle_button = TriangleButton(root, "Presionar", size=100, color="green", command=on_button_click)
-    triangle_button.pack(pady=20)
+        # Obtener las coordenadas X e Y del joystick
+        x_axis = joystick.get_axis(0)
+        y_axis = joystick.get_axis(1)
 
-    root.mainloop()
+        # Imprimir las coordenadas
+        print("Coordenada X: {:.2f}, Coordenada Y: {:.2f}".format(x_axis, y_axis))
 
-
-
-
-
-
-
-
+else:
+    print("No se encontraron joysticks conectados.")
 
 
 

@@ -46,14 +46,14 @@ class Generative_IAS:
         self.generated_image=0
         self.generator=0
         self.image_to_show=0
-          
         
+
     def start_directorio(self):
         
         pd.set_option('display.width', 800)
         pd.set_option('display.max_columns', 700)
         
-        self.path=r'C:/Users/desca/Downloads/archive/data/todo'
+        self.path=r'C:/Users/desca/Downloads/todo'
         self.directorio=os.listdir(self.path)
         print(self.directorio)
 
@@ -96,15 +96,10 @@ class Generative_IAS:
         
         self.x=np.array(self.imagenes)
         self.y=np.array(self.clases)
-        print(f'imprimiendo los datos {self.x.shape}')
-        print("\n\n")
-
-        #print(self.x[0].reshape(self.height,self.width,1).shape)
-        #print("IMPRIMIENDO LOS DATOS")
-        cv2.imshow('imagen',self.x[10].reshape(224,224,1))
-        cv2.waitKey(5)
+        print(self.x.shape)
+        print(self.y.shape)
         
-    def char(self):
+    def Char(self):
         
         self.width2=10
         self.height2=10
@@ -115,7 +110,8 @@ class Generative_IAS:
           self.index=np.random.randint(0,len(self.x))
           self.axs[self.i].imshow(self.x[self.index].reshape(self.height,self.width,1))
           self.axs[self.i].axis('off')
-        cv2.waitKey(20)
+       
+        plt.show()
         
         
     def Normalizacion(self):
@@ -177,32 +173,45 @@ class Generative_IAS:
         
           # 224x224x3
           self.network.add(Conv2DTranspose(1, (5,5), strides = (2,2), padding='same', use_bias=False,activation='tanh'))
-        
-        
           self.network.summary()
         
           return self.network
       
     def Generator(self):
         
+        print("X"*100)
         self.generator=self.Build_generator()
+        print(self.generator)
         
     def Noise_generator(self):
         
+        print("X"*100)
+        print("X"*100)
         self.noise=tf.random.normal([1,100])
         print(self.noise)
         
     def Generated_image(self):
-        
+          
+        print("imprimiendo el noise")
+        print(self.noise)
         self.generated_image=self.generator(self.noise,training=False)
-        print(f'{self.generated_image},{self.generated_image.shape}')
+        print("imprimiendo el formato")
+        print(list(self.generated_image[0,:,:,0]))
         
-    def Plot_Image(self):
-        
-        print(self.generated_image[0,:,:,0].shape)
-        self.image_to_show=np.array(self.generated_image[0,:,:,0])
-        plt.imshow(self.image_to_show,cmap='gray')
+    def Plot_Image(self):   
+    
+        plt.imshow(list(self.generated_image[0,:,:,0]),cmap='gray')
         plt.show()
+        #cv2.imshow('imagen',self.generated_image[0,:,:,0])
+        #cv2.waitKey(12)
+        #plt.imshow(self.generated_image[0,:,:,0],cmap='gray')
+        #plt.show()
+        #print(f'{self.generated_image},{self.generated_image.shape}')
+        
+        #print(self.generated_image[0,:,:,0].shape)
+        #self.image_to_show=np.array(self.generated_image[0,:,:,0])
+        #plt.imshow(self.image_to_show,cmap='gray')
+        #plt.show()
         
      
         
