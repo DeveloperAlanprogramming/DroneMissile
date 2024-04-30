@@ -88,6 +88,7 @@ class metodos(Generative_IAS):
             self.ret, self.frame = self.cap.read()
             if self.ret:
                 # Muestra el fotograma en una ventana
+                cv2.putText(self.frame, f'TRACKING SYSTEM', (220,100), cv2.FONT_HERSHEY_SIMPLEX, 1, (250, 0, 250), 3)
                 cv2.imshow('Video', self.frame)
             if cv2.waitKey(1) & 0xFF == ord('q'):  # Presiona 'q' para salir
                 break
