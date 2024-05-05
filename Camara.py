@@ -1,36 +1,24 @@
 import pygame
+from pygame.locals import *
 
-# Inicializar pygame
 pygame.init()
+pygame.joystick.init()
 
-# Obtener la cantidad de joysticks disponibles
-num_joysticks = pygame.joystick.get_count()
-
-if num_joysticks > 0:
-    print("Se encontraron {} joysticks.".format(num_joysticks))
-    # Inicializar el primer joystick
+if pygame.joystick.get_count() == 0:
+    print("No se ha detectado ningún joystick.")
+else:
     joystick = pygame.joystick.Joystick(0)
     joystick.init()
 
-    # Ciclo principal
+    print("Nombre del joystick:", joystick.get_name())
+    print("Número de botones:", joystick.get_numbuttons())
+
     while True:
-        # Manejar eventos
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                exit()
+            if event.type == JOYBUTTONDOWN:
+                print("Botón {} presionado".format(event.button))
 
-        # Obtener las coordenadas X e Y del joystick
-        x_axis = joystick.get_axis(0)
-        y_axis = joystick.get_axis(1)
-
-        # Imprimir las coordenadas
-        print("Coordenada X: {:.2f}, Coordenada Y: {:.2f}".format(x_axis, y_axis))
-
-else:
-    print("No se encontraron joysticks conectados.")
-
-
+     
 
 
 

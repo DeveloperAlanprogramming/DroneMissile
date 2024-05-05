@@ -9,6 +9,7 @@ import pygame
 from tkinter import Toplevel
 import threading
 import multiprocessing
+import serial
 
 
 class Laser(metodos):
@@ -82,13 +83,13 @@ class Laser(metodos):
         self.button2=tk.Button(self.root,text="CLOSE",command=self.close_camara,background="gray",width=10,height=2,font=("arial", 20,"bold"))
         self.button2.place(x=30,y=800)
         
-        self.button3=tk.Button(self.root,text="GENERATIVE AI OFF",command=self.motorstart, background="gray",width=20,height=2,font=("arial", 20,"bold"))
+        self.button3=tk.Button(self.root,text="GENERATIVE AI OFF",command=self.Serie_dataForward, background="gray",width=20,height=2,font=("arial", 20,"bold"))
         self.button3.place(x=220,y=700)
         
         self.button4=tk.Button(self.root,text="GENERATIVE AI ON",command=self.Test,background="gray",width=20,height=2,font=("arial", 20,"bold"))
         self.button4.place(x=220,y=800)
         
-        self.button5=tk.Button(self.root,text="SYSTEM START",command=self.Test, background="gray",width=15,height=2,font=("arial", 20,"bold"))
+        self.button5=tk.Button(self.root,text="SYSTEM START",command=self.joystickC, background="gray",width=15,height=2,font=("arial", 20,"bold"))
         self.button5.place(x=576,y=700)
         
         self.button6=tk.Button(self.root,text="SYSTEM OFF",command=self.systemoff,background="gray",width=15,height=2,font=("arial", 20,"bold"))
