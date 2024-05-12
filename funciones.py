@@ -11,8 +11,6 @@ import pygame
 import serial
 from sklearn.model_selection._split import _BaseKFold
 
-
-
 class metodos(Generative_IAS):
     
 
@@ -126,7 +124,8 @@ class metodos(Generative_IAS):
         while self.bandera:  
         
             self.motorup=1
-            self.ser.write(str(self.motorup).encode()+b'\r\n')
+            #str(self.motorup).encode()+b'\r\n'
+            self.ser.write(b'A')
             self.bandera=False
             
     def Motor_Reverse(self):
@@ -134,16 +133,17 @@ class metodos(Generative_IAS):
         while self.bandera:  
         
             self.motorup=-1
-            self.ser.write(str(self.motorup).encode()+b'\r\n')
+            #str(self.motorup).encode()+b'\r\n'
+            self.ser.write(b'B')
             self.bandera=False
             
     def Motor_OFF(self):
           
         while self.bandera:  
         
-        
             self.motorup=0
-            self.ser.write(str(self.motorup).encode()+b'\r\n')
+            #str(self.motorup).encode()+b'\r\n'
+            self.ser.write(b'Cr')
             self.bandera=False
        
     def abrir_camara(self):
@@ -188,20 +188,17 @@ class metodos(Generative_IAS):
             print(self.i)
         self.is_capturing = False
         
-        
     def close_camara(self):
         self.is_camera_open = False
         if self.capture_thread and self.capture_thread.is_alive():
             self.capture_thread.join() 
         
-     
     def joystickC(self):
         if not self.positionC:
             self.positionC = True
             print("Entro jostick")
             threading.Thread(target=self.main_C).start()
 
-    
     def main_C(self):
     # Inicializar pygame
         pygame.init()
@@ -266,16 +263,13 @@ class metodos(Generative_IAS):
                     elif self.event.button ==7:
                         
                         self.deleteFhoto()
-                        break
-                        
-                                 
+                        break                          
 
     def joystick_control(self):
         if not self.control:
             self.control = True
             print("Entro jostick")
             threading.Thread(target=self.coordenadas).start()
-    
     
     def coordenadas(self):
         
@@ -296,11 +290,10 @@ class metodos(Generative_IAS):
                     if self.event.type == pygame.QUIT:
                         pygame.quit()
                         exit()
-            
+                        
                     # Obtener las coordenadas X e Y del joystick
                     self.x_axis = self.joystick.get_axis(0)
                     self.y_axis = self.joystick.get_axis(1)
-            
                     # Imprimir las coordenadas
                     print("Coordenada X: {:.2f}, Coordenada Y: {:.2f}".format(self.x_axis, self.y_axis))
             
@@ -319,7 +312,4 @@ class metodos(Generative_IAS):
     def propulsion(self):
             
         print("Sistema de lanzamiento")
-             
-
-        
-        
+                  

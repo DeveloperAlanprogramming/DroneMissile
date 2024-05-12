@@ -40,7 +40,6 @@ class Laser(metodos):
         self.label4=0
         self.label5=0
         
-     
         self.image=0
         self.frame_rgb=0
         self.img_tk=0
@@ -60,11 +59,8 @@ class Laser(metodos):
         self.video_window.title("Video de la Webcam")
         self.canvas = tk.Canvas(self.video_window, width=640, height=480)
         self.canvas.pack()
-        #self.control()
-        
         self.compontentes()
-        #self.coordenadas()
-        
+
     def compontentes(self):
         
         self.caja_botones()
